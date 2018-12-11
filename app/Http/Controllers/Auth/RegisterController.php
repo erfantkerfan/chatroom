@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -35,10 +37,10 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('guest');
-    }
+//    public function __construct()
+//    {
+//        $this->middleware('guest');
+//    }
 
     /**
      * Get a validator for an incoming registration request.
@@ -68,5 +70,33 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+    public function showPasswordForm()
+    {
+        return view('auth.password');
+    }
+
+    public function password(Request $request)
+    {
+        Validator::extend('old_password', function ($attribute, $value, $parameters, $validator) {
+            return Hash::check($value, current($parameters));
+        });
+
+        $this->Validate($request,[
+            'old_password' => 'required|old_password:' . Auth::user()->password,
+            'password' => 'string|min:6|confirmed'
+        ]);
+
+        $user = User::FindOrFail(Auth::user()->id);
+        $user->password = bcrypt($request['password']);
+        $user->save();
+        return redirect(route('home'));
+    }
+
+    public function delete(Request $request)
+    {
+        $user = User::FindOrFail($request->id);
+        $user -> delete();
+        return back();
     }
 }
