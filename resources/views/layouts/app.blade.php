@@ -59,11 +59,16 @@
                                     {{ Auth::user()->username }} <span class="caret"></span>
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu dropdown-menu-right text-center" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" href="{{ route('home') }}">
+                                        صفحه من
+                                    </a>
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        خروج
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -77,7 +82,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="py-4" dir="rtl">
             @yield('content')
         </main>
     </div>
