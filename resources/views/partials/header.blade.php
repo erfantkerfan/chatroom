@@ -5,7 +5,7 @@
                 <div class="card-header text-center">داشبورد دسترسی</div>
 
                 <div class="card-body text-center justify-content-center">
-                    <a href="/">
+                    <a href="{{Route('school')}}">
                         <button type="button" class="btn btn-primary">مدرسه</button>
                     </a>
                     <a href="/">

@@ -25,3 +25,5 @@ Route::get('/home', 'HomeController@index')->name('home');
     // Password Routes:
     Route::get('password', 'Auth\RegisterController@showPasswordForm')->name('password');
     Route::post('password', 'Auth\RegisterController@Password');
+// School Route
+Route::get('school','SchoolController@index')->name('school');
