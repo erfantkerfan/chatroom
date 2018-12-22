@@ -28,7 +28,6 @@ class SchoolController extends Controller
         ));
 
         $school->save();
-        $notif = 'تیتر با موفقیت ایجاد شد';
-        return back()->with(compact('notif'));
+        return back();
     }
 }

@@ -5,11 +5,11 @@
 
             <div class="col-3">
                 <div class="card">
-                    <div class="card-header text-center">داشبورد ایجاد مدرسه</div>
+                    <div class="card-header text-center">داشبورد ایجاد تیکت</div>
 
                     <div class="card-body text-center justify-content-center">
                         <form class="form" method="POST" action="{{ route('report_post') }}" enctype="multipart/form-data">
-                            {{ csrf_field() }}
+                            @csrf
 
                             <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                                 <label for="title" class="control-label sr-only">تیتر</label>
@@ -87,18 +87,66 @@
                                         <br>
                                         <br>
                                     @endif
-                                    <div class="card text-right">
-                                        <div class="card-body">
-                                            <h5 class="card-title">تیتر</h5>
-                                            <p class="card-text">متن</p>
-                                            <a href="#" class="btn btn-primary btn-sm">لینک به فایل</a>
+                                    @if($report->answer!=null)
+                                        <div class="card text-right">
+                                            <div class="card-body">
+                                                <p class="card-text">{{$report->answer}}</p>
+                                                @if($report->answer_file!=null)
+                                                    <a href="{{'/file/school/a/'.$report->id.'.'.$report->answer_file}}" class="btn btn-primary btn-sm">دانلود فایل</a>
+                                                @endif
+                                            </div>
                                         </div>
-                                    </div>
+                                    @else
+                                        @if($reports->currentPage()==1 and $loop->iteration==1)
+                                            <div class="card text-right">
+                                                <div class="card-body">
+                                                    <form class="form" method="POST" action="{{ route('report_post') }}" enctype="multipart/form-data">
+                                                        @csrf
+                                                        @method('PATCH')
+                                                        <label for="ref" class="sr-only">عدد</label>
+                                                        <input hidden="" id="ref" type="text" class="form-control" name="ref" value="{{$report->id}}">
+
+                                                        <div class="form-group{{ $errors->has('answer') ? ' has-error' : '' }}">
+                                                            <div class="col-12">
+                                                                <label for="answer" class="sr-only">پاسخ</label>
+                                                                <textarea class="form-control text-center" id="answer" name="answer" rows="5" placeholder="پاسخ" required></textarea>
+                                                                @if ($errors->has('answer'))
+                                                                    <span class="help-block">
+                                                                    <strong>{{ $errors->first('answer') }}</strong>
+                                                                </span>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group{{ $errors->has('answer_file') ? ' has-error' : '' }}">
+                                                            <div class="col-12">
+                                                                <input id="answer_file" type="file" class="form-control-file" name="answer_file">
+                                                                @if ($errors->has('answer_file'))
+                                                                    <span class="help-block">
+                                                                    <strong>
+                                                                        {{ $errors->first('answer_file') }}
+                                                                    </strong>
+                                                                </span>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <button type="submit" class="btn btn-primary btn-sm">
+                                                                ثبت
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    @endif
                                 </div>
                             </div>
                             <br>
                         @endforeach
                         <div> {{$reports->links()}} </div>
+                        <div> {{}} </div>
                     </div>
                 </div>
             </div>

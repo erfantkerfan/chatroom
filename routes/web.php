@@ -28,7 +28,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 // School Route
 Route::get('school','SchoolController@index')->name('school');
 Route::post('school','SchoolController@create');
-
 // Report Routes
 Route::get('report/{id}','ReportController@index')->name('report');
 Route::post('report','ReportController@create')->name('report_post');
+Route::patch('report','ReportController@patch');
+// Trainer Routes

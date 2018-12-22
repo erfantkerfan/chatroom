@@ -4,7 +4,7 @@
     <br>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="card">
                     <div class="card-header text-center">داشبورد مدرسه</div>
 
@@ -17,13 +17,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col-3">
+            <div class="col-2">
                 <div class="card">
                     <div class="card-header text-center">داشبورد ایجاد موضوع</div>
 
                     <div class="card-body text-center justify-content-center">
                         <form class="form" method="POST" action="{{ route('school') }}">
-                            {{ csrf_field() }}
+                            @csrf
 
                             <div class="form-group{{ $errors->has('school') ? ' has-error' : '' }}">
                                 <label for="expense" class="control-label sr-only">

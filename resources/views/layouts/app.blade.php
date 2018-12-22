@@ -83,16 +83,16 @@
         </nav>
 
         <main class="py-4" dir="rtl">
-            @if(isset($notif))
-                <div class="row justify-content-center">
-                    <div class="col-4 alert alert-warning alert-dismissible fade show text-center" role="alert">
-                        <strong>{{$notif}}</strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                </div>
-            @endif
+            {{--@if(isset($notif))--}}
+                {{--<div class="row justify-content-center">--}}
+                    {{--<div class="col-4 alert alert-warning alert-dismissible fade show text-center" role="alert">--}}
+                        {{--<strong>{{$notif}}</strong>--}}
+                        {{--<button type="button" class="close" data-dismiss="alert" aria-label="Close">--}}
+                            {{--<span aria-hidden="true">&times;</span>--}}
+                        {{--</button>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--@endif--}}
             @yield('content')
         </main>
     </div>

@@ -14,7 +14,7 @@ class ReportController extends Controller
         $user = Auth::user();
         $categories = $user->school()->get();
         $title = School::where('id','=',$id)->first();
-        $reports = Report::where('school_id','=',$id)->paginate('5');
+        $reports = Report::where('school_id','=',$id)->orderby('created_at','desc')->paginate('5');
         return view('report')->with(compact('reports','categories','title'));
     }
 
@@ -44,7 +44,31 @@ class ReportController extends Controller
         if($request->hasFile('file')) {
             $request->file('file')->move(public_path('file/school/q'), $file_name);
         }
-        $notif = 'گزارش با موفقیت ایجاد شد';
-        return back()->with(compact('notif'));
+        return back();
+    }
+
+    public function patch(Request $request)
+    {
+        $user = Auth::user();
+        $request->validate([
+            'answer' => 'required|string',
+        ]);
+
+        if($request->hasFile('answer_file')){
+            $answer_file = $request->file('answer_file')->getClientOriginalExtension();
+        }else{
+            $answer_file = null;
+        }
+
+        $report = Report::FindOrFail($request->ref);
+        $report->answer = $request->answer;
+        $report->answer_file = $answer_file;
+        $report->save();
+
+        $file_name = $report->id .'.'.$answer_file;
+        if($request->hasFile('answer_file')) {
+            $request->file('answer_file')->move(public_path('file/school/a'), $file_name);
+        }
+        return back();
     }
 }
