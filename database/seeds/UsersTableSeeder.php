@@ -13,12 +13,15 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             'username' => '0019451210',
-            'admin' => '0',
+            'admin' => '1',
+            'access' => '0',
             'zone' => '1',
             'district' => '2',
             'grade' => '10',
-            'name' => 'erfan',
-            'l_name' => 'gholizade',
+            'gender' => 'male',
+            'name' => 'عرفان',
+            'l_name' => 'قلی زاده',
+            'mobile' => '09305551082',
             'password' => bcrypt('erfan'),
             'remember_token' => str_random(10),
             'created_at' => \Carbon\Carbon::now(),

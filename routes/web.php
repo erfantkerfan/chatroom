@@ -13,6 +13,7 @@
 
 Route::get('/','Controller@welcome');
 Route::get('/home', 'HomeController@index')->name('home');
+
 // Auth Routes:
     // Login Routes:
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -25,11 +26,14 @@ Route::get('/home', 'HomeController@index')->name('home');
     // Password Routes:
     Route::get('password', 'Auth\RegisterController@showPasswordForm')->name('password');
     Route::post('password', 'Auth\RegisterController@Password');
+
 // School Route
 Route::get('school','SchoolController@index')->name('school');
 Route::post('school','SchoolController@create');
+
 // Report Routes
 Route::get('report/{id}','ReportController@index')->name('report');
 Route::post('report','ReportController@create')->name('report_post');
 Route::patch('report','ReportController@patch');
+
 // Trainer Routes
